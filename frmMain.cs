@@ -38,7 +38,7 @@ namespace JavaCompilerBatGenerator
             {
                 SR = new StreamReader($"{lblSourceFile.Text}\\{lsbSelectedFiles.Items[x].ToString()}");
                 while ((temp = SR.ReadLine()) != null && LookForMain)
-                    LookForMain = temp.IndexOf("public static void main(") == -1;
+                    LookForMain = temp.IndexOf("public static void main") == -1 && temp.IndexOf ("(String[]") == -1;
                 x++;
             }
             /*if (LookForMain)
