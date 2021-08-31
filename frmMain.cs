@@ -37,7 +37,7 @@ namespace JavaCompilerBatGenerator
             while (LookForMain && x < lsbSelectedFiles.Items.Count)
             {
                 SR = new StreamReader($"{lblSourceFile.Text}\\{lsbSelectedFiles.Items[x].ToString()}");
-                while ((temp = SR.ReadLine()) != null && LookForMain)
+                while ((temp = SR.ReadLine()) != null && LookForMain)//Checks for main and then for String if spaces are in between
                     LookForMain = temp.IndexOf("public static void main") == -1 && temp.IndexOf ("(String[]") == -1;
                 x++;
             }
