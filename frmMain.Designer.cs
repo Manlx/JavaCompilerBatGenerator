@@ -21,9 +21,9 @@ namespace JavaCompilerBatGenerator
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.btnMoveUp = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.chkIndepthLook = new System.Windows.Forms.CheckBox();
             this.chkScanFiles = new System.Windows.Forms.CheckBox();
             this.lblSourceFile = new System.Windows.Forms.Label();
             this.btnHelp = new System.Windows.Forms.Button();
@@ -47,6 +47,7 @@ namespace JavaCompilerBatGenerator
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.chkIndepthLook);
             this.groupBox1.Controls.Add(this.chkScanFiles);
             this.groupBox1.Controls.Add(this.lblSourceFile);
             this.groupBox1.Controls.Add(this.btnHelp);
@@ -61,12 +62,22 @@ namespace JavaCompilerBatGenerator
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Compile Code";
             // 
+            // chkIndepthLook
+            // 
+            this.chkIndepthLook.AutoSize = true;
+            this.chkIndepthLook.Location = new System.Drawing.Point(288, 10);
+            this.chkIndepthLook.Name = "chkIndepthLook";
+            this.chkIndepthLook.Size = new System.Drawing.Size(215, 23);
+            this.chkIndepthLook.TabIndex = 4;
+            this.chkIndepthLook.Text = "In Depth Warnings";
+            this.chkIndepthLook.UseVisualStyleBackColor = true;
+            // 
             // chkScanFiles
             // 
             this.chkScanFiles.AutoSize = true;
             this.chkScanFiles.Checked = true;
             this.chkScanFiles.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkScanFiles.Location = new System.Drawing.Point(159, 12);
+            this.chkScanFiles.Location = new System.Drawing.Point(145, 12);
             this.chkScanFiles.Name = "chkScanFiles";
             this.chkScanFiles.Size = new System.Drawing.Size(138, 23);
             this.chkScanFiles.TabIndex = 3;
@@ -170,6 +181,7 @@ namespace JavaCompilerBatGenerator
         private System.Windows.Forms.Label lblSourceFile;
         private System.Windows.Forms.Button btnGenerate;
         private System.Windows.Forms.CheckBox chkScanFiles;
+        private System.Windows.Forms.CheckBox chkIndepthLook;
     }
 }
 

@@ -86,7 +86,7 @@ namespace JavaCompilerBatGenerator
             //Creates file and writes cmd commands
             StreamWriter fs = new StreamWriter((lblSourceFile.Text + @"\Run.bat"));
             foreach (var item in lsbSelectedFiles.Items)
-                fs.WriteLine("javac "+item.ToString());
+                fs.WriteLine($"javac {((chkIndepthLook.Checked)? "-Xlint:unchecked" : "")} {item.ToString()}");
             fs.WriteLine("java " + lsbSelectedFiles.Items[lsbSelectedFiles.Items.Count-1].ToString() );
             fs.WriteLine("pause");
             fs.Close();
