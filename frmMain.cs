@@ -63,6 +63,7 @@ namespace JavaCompilerBatGenerator
             }
             else
                 MessageBox.Show("No file selected");
+            myDialog.Dispose();
         }
 
         private void btnGenerate_Click(object sender, EventArgs e)
@@ -84,13 +85,22 @@ namespace JavaCompilerBatGenerator
                         }
             }
             //Creates file and writes cmd commands
-            StreamWriter fs = new StreamWriter((lblSourceFile.Text + @"\Run.bat"));
+            StreamWriter fs = new StreamWriter($"{lblSourceFile.Text}\\Run.bat");
             foreach (var item in lsbSelectedFiles.Items)
                 fs.WriteLine($"javac {((chkIndepthLook.Checked)? "-Xlint:unchecked" : "")} {item.ToString()}");
             fs.WriteLine("java " + lsbSelectedFiles.Items[lsbSelectedFiles.Items.Count-1].ToString() );
             fs.WriteLine("pause");
             fs.Close();
+            
             MessageBox.Show("File generated successful");
+            if (MessageBox.Show("Run Bat","Want to Execute Bat",MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                System.Diagnostics.Process ExecuteBat = new System.Diagnostics.Process();
+                ExecuteBat.StartInfo.WorkingDirectory = lblSourceFile.Text+"\\";
+                ExecuteBat.StartInfo.FileName = $"{lblSourceFile.Text}\\Run.bat";
+                ExecuteBat.Start();
+            }
+                
         }
 
         private void btnMoveDown_Click(object sender, EventArgs e)
