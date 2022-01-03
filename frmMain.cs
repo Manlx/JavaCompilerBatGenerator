@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
@@ -6,9 +8,17 @@ namespace JavaCompilerBatGenerator
 {
     public partial class frmMain : Form
     {
+        public SavedSettings SavedFiles;
+        private List<string> CorrectFiles;
+        frmSettings frmSet;
         public frmMain()
         {
             InitializeComponent();
+            frmSet = new frmSettings(this);
+            if (SavedFiles != null)
+                GetJavaLibs();
+            if (CorrectFiles.Count > 0)
+                pnlLibsLoaded.BackColor = Color.FromArgb(00,99,00);
             ChangeComponentStates(false);
         }
 
@@ -28,6 +38,19 @@ namespace JavaCompilerBatGenerator
             btnMoveDown.Enabled = State;
             btnGenerate.Enabled = State;
         }
+        private void ScanForJavaFXDepend()
+        {
+            int x = 0;
+            StreamReader SR;
+            string temp;
+            while (!chkJavaFX.Checked && x < lsbSelectedFiles.Items.Count)
+            {
+                SR = new StreamReader($"{lblSourceFile.Text}\\{lsbSelectedFiles.Items[x].ToString()}");
+                while ((temp = SR.ReadLine()) != null && !chkJavaFX.Checked)//Checks for main and then for String if spaces are in between
+                    chkJavaFX.Checked = !(temp.IndexOf("javafx.application") == -1);
+                x++;
+            }
+        }
         private int ScanFile()
         {//Scans listed files for main entry point for java
             bool LookForMain = true;
@@ -39,6 +62,7 @@ namespace JavaCompilerBatGenerator
                 SR = new StreamReader($"{lblSourceFile.Text}\\{lsbSelectedFiles.Items[x].ToString()}");
                 while ((temp = SR.ReadLine()) != null && LookForMain)//Checks for main and then for String if spaces are in between
                     LookForMain = temp.IndexOf("public static void main") == -1 && temp.IndexOf ("(String[]") == -1;
+                
                 x++;
             }
             /*if (LookForMain)
@@ -59,11 +83,12 @@ namespace JavaCompilerBatGenerator
                     if (Path.GetExtension(item.ToString()) == ".java")
                         lsbSelectedFiles.Items.Add(Path.GetFileName(item.ToString()));
                 ChangeComponentStates(lsbSelectedFiles.Items.Count > 0);
-                
+                ScanForJavaFXDepend();
             }
             else
                 MessageBox.Show("No file selected");
             myDialog.Dispose();
+            
         }
 
         private void btnGenerate_Click(object sender, EventArgs e)
@@ -86,9 +111,24 @@ namespace JavaCompilerBatGenerator
             }
             //Creates file and writes cmd commands
             StreamWriter fs = new StreamWriter($"{lblSourceFile.Text}\\Run.bat");
+            string JavaFXCompilation = "";
+            if (chkJavaFX.Checked)
+            {
+                //JavaFXCompilation = $"--module-path {'"'}{SavedFiles.JavaFXFilePath}{'"'} --add-modules ";
+                //for (int x = 0; x < CorrectFiles.Count; x++)
+                //{
+                //    JavaFXCompilation += $"{Path.GetFileNameWithoutExtension( CorrectFiles[x])}";
+                //    if (x < CorrectFiles.Count - 1)
+                //        JavaFXCompilation = JavaFXCompilation + ",";
+                //}
+                JavaFXCompilation = $"--module-path {'"'}{SavedFiles.JavaFXFilePath}{'"'} --add-modules javafx.controls,javafx.fxml";
+            }
+            
+                
+
             foreach (var item in lsbSelectedFiles.Items)
-                fs.WriteLine($"javac {((chkIndepthLook.Checked)? "-Xlint:unchecked" : "")} {item.ToString()}");
-            fs.WriteLine("java " + lsbSelectedFiles.Items[lsbSelectedFiles.Items.Count-1].ToString() );
+                fs.WriteLine($"javac {JavaFXCompilation} {((chkIndepthLook.Checked)? "-Xlint:unchecked" : "")} {item.ToString()}");
+            fs.WriteLine($"java {JavaFXCompilation} {lsbSelectedFiles.Items[lsbSelectedFiles.Items.Count - 1].ToString()}" );
             fs.WriteLine("pause");
             fs.Close();
             
@@ -105,7 +145,7 @@ namespace JavaCompilerBatGenerator
 
         private void btnMoveDown_Click(object sender, EventArgs e)
         {   //Does a simple check if the item can be moved and if it can does a simple swap
-            if (lsbSelectedFiles.SelectedIndex != lsbSelectedFiles.Items.Count-1)
+            if (lsbSelectedFiles.SelectedIndex != lsbSelectedFiles.Items.Count-1 && lsbSelectedFiles.Items.Count > 1)
             {
                 var temp = lsbSelectedFiles.Items[lsbSelectedFiles.SelectedIndex + 1];
                 lsbSelectedFiles.Items[lsbSelectedFiles.SelectedIndex + 1] = lsbSelectedFiles.Items[lsbSelectedFiles.SelectedIndex];
@@ -118,6 +158,21 @@ namespace JavaCompilerBatGenerator
         {//Displayes help form
             frmHelp temp = new frmHelp();
             temp.ShowDialog();
+        }
+        private void btnOptions_Click(object sender, EventArgs e)
+        {
+            
+            frmSet.ShowDialog();
+        }
+        private void GetJavaLibs()
+        {
+            string[] Files = Directory.GetFiles(SavedFiles.JavaFXFilePath+"\\");
+            CorrectFiles = new List<string>();
+            foreach (string x in Files)
+            {
+                if (Path.GetExtension(x).ToUpper() == ".JAR")
+                    CorrectFiles.Add(x);
+            }
         }
     }
 }

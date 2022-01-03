@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "B5FTMo2MomqI0U75v9Z5m8WQSK3b/x7MrcMVQEuIzpaaLhhovM8d7hbaG86lZzhTf7L2fNWs7YAQg6x1X8MI9A==",
+  "dgSpecHash": "kn0p14r3gqp6EeUGiO3kQ76DaP5W1u+SlZ/Oovc6Xbiwf2OSbXI5WXcFD0VKdtrmshT82ZNsZU4WF8R4K/iOBQ==",
   "success": true,
-  "projectFilePath": "E:\\Programming_And_Stuff\\Programing\\C#\\JavaCompilerBatGenerator\\JavaCompilerBatGenerator.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "D:\\Programming_And_Stuff\\Programing\\C#\\JavaCompilerBatGenerator\\JavaCompilerBatGenerator.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Manlx\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.22\\microsoft.netcore.app.host.win-x64.3.1.22.nupkg.sha512",
+    "C:\\Users\\Manlx\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.10\\microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512",
+    "C:\\Users\\Manlx\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\3.1.0\\microsoft.windowsdesktop.app.ref.3.1.0.nupkg.sha512",
+    "C:\\Users\\Manlx\\.nuget\\packages\\microsoft.netcore.app.ref\\3.1.0\\microsoft.netcore.app.ref.3.1.0.nupkg.sha512"
+  ],
   "logs": []
 }
