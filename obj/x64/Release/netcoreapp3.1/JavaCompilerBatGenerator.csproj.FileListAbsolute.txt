@@ -6,6 +6,7 @@ D:\Programming_And_Stuff\Programing\C#\JavaCompilerBatGenerator\bin\x64\Release\
 D:\Programming_And_Stuff\Programing\C#\JavaCompilerBatGenerator\bin\x64\Release\netcoreapp3.1\JavaCompilerBatGenerator.pdb
 D:\Programming_And_Stuff\Programing\C#\JavaCompilerBatGenerator\obj\x64\Release\netcoreapp3.1\JavaCompilerBatGenerator.frmHelp.resources
 D:\Programming_And_Stuff\Programing\C#\JavaCompilerBatGenerator\obj\x64\Release\netcoreapp3.1\JavaCompilerBatGenerator.frmMain.resources
+D:\Programming_And_Stuff\Programing\C#\JavaCompilerBatGenerator\obj\x64\Release\netcoreapp3.1\JavaCompilerBatGenerator.frmSettings.resources
 D:\Programming_And_Stuff\Programing\C#\JavaCompilerBatGenerator\obj\x64\Release\netcoreapp3.1\JavaCompilerBatGenerator.csproj.GenerateResource.cache
 D:\Programming_And_Stuff\Programing\C#\JavaCompilerBatGenerator\obj\x64\Release\netcoreapp3.1\JavaCompilerBatGenerator.GeneratedMSBuildEditorConfig.editorconfig
 D:\Programming_And_Stuff\Programing\C#\JavaCompilerBatGenerator\obj\x64\Release\netcoreapp3.1\JavaCompilerBatGenerator.AssemblyInfoInputs.cache

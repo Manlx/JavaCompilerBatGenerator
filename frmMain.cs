@@ -17,8 +17,9 @@ namespace JavaCompilerBatGenerator
             frmSet = new frmSettings(this);
             if (SavedFiles != null)
                 GetJavaLibs();
-            if (CorrectFiles.Count > 0)
-                pnlLibsLoaded.BackColor = Color.FromArgb(00,99,00);
+            if (CorrectFiles != null) 
+                if (CorrectFiles.Count > 0)
+                    pnlLibsLoaded.BackColor = Color.FromArgb(00,99,00);
             ChangeComponentStates(false);
         }
 
@@ -65,8 +66,7 @@ namespace JavaCompilerBatGenerator
                 
                 x++;
             }
-            /*if (LookForMain)
-                x = -2;*/
+            
             if (LookForMain)
                 return -1;
             return --x;
