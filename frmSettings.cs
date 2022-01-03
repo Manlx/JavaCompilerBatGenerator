@@ -13,6 +13,7 @@ namespace JavaCompilerBatGenerator
     public partial class frmSettings : Form
     {
         private const string SettingsName = "Settings.data";
+        public bool doClick = false;
         Form frmMain;
         public frmSettings(Form Creator)
         {
@@ -60,16 +61,24 @@ namespace JavaCompilerBatGenerator
                 UpdateSaveSettings();
                 SaveFile();
                 SavedSettings.JavaFXFilePath = folderBrowserDialog.SelectedPath;
+                ((frmMain)frmMain).SavedFiles = SavedSettings;
             }
                 
         }
 
         private void frmSettings_Load(object sender, EventArgs e)
         {
+            if (SavedSettings != null)
             if (SavedSettings.JavaFXFilePath != "")
                 lblJFXPath.Text = SavedSettings.JavaFXFilePath;
             else
                 lblJFXPath.Text = "Java FX Path: ";
+            if (doClick)
+            {
+                btnJFXPath.PerformClick();
+                doClick = false;
+            }
+                
         }
     }
 }

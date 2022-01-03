@@ -81,6 +81,6 @@
         }
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label lblJFXPath;
-        private System.Windows.Forms.Button btnJFXPath;
+        public System.Windows.Forms.Button btnJFXPath;
     }
 }

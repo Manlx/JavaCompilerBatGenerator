@@ -17,12 +17,19 @@ namespace JavaCompilerBatGenerator
             frmSet = new frmSettings(this);
             if (SavedFiles != null)
                 GetJavaLibs();
-            if (CorrectFiles != null) 
-                if (CorrectFiles.Count > 0)
-                    pnlLibsLoaded.BackColor = Color.FromArgb(00,99,00);
+            CheckForDependFiles();
             ChangeComponentStates(false);
         }
-
+        private bool CheckForDependFiles()
+        {
+            if (CorrectFiles != null)
+                if (CorrectFiles.Count > 0)
+                {
+                    pnlLibsLoaded.BackColor = Color.FromArgb(00, 99, 00);
+                    return true;
+                }
+            return false;
+        }
         private void btnMoveUp_Click(object sender, EventArgs e)
         {  //Does a simple check if the item can be moved and if it can does a simple swap
             if (lsbSelectedFiles.SelectedIndex != 0)
@@ -41,6 +48,14 @@ namespace JavaCompilerBatGenerator
         }
         private void ScanForJavaFXDepend()
         {
+            if (!CheckForDependFiles())
+                if (MessageBox.Show("Now JavaFX Libaries are selected. Would you like to select your JavaFX Files?","Missing JavaFX",MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    frmSet.doClick = true;
+                    frmSet.ShowDialog();
+                }
+            GetJavaLibs();
+            CheckForDependFiles();
             int x = 0;
             StreamReader SR;
             string temp;
@@ -166,6 +181,8 @@ namespace JavaCompilerBatGenerator
         }
         private void GetJavaLibs()
         {
+            if (SavedFiles == null)
+                return;
             string[] Files = Directory.GetFiles(SavedFiles.JavaFXFilePath+"\\");
             CorrectFiles = new List<string>();
             foreach (string x in Files)
