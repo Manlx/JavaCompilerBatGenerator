@@ -1,12 +1,12 @@
 ﻿
 using System;
 
-namespace JavaCompilerBatGenerator
+namespace SavedSetting
 {
     [Serializable]
     public class SavedSettings
     {
-        
         public string JavaFXFilePath;
+        public string JDKFilePath;
     }
 }
