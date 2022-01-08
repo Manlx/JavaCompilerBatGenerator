@@ -92,6 +92,7 @@
             this.btnJDKPath.TabIndex = 2;
             this.btnJDKPath.Text = "...";
             this.btnJDKPath.UseVisualStyleBackColor = false;
+            this.btnJDKPath.Click += new System.EventHandler(this.btnJDKPath_Click);
             // 
             // lblJDKPath
             // 
@@ -116,6 +117,7 @@
             this.Name = "frmSettings";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Settings";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmSettings_FormClosing);
             this.Load += new System.EventHandler(this.frmSettings_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

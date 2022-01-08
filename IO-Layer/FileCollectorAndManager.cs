@@ -8,22 +8,17 @@ namespace FileCollectorAndManager
 {
     public class FileCollectorAndManager
     {
-        public  FolderBrowserDialog FolderSelector = new FolderBrowserDialog();
-        public  string FileSource;
+        public  string FileSource;//Source Folder from where to start
         public  List<string> CompleteFileList = new List<string>();
         public  List<string> CompleteFolderList = new List<string>();
-        public  bool SelectFiles(bool SelectSubFiles)
+        public  bool SelectFiles(bool SelectSubFiles)//A method to collect all files in either the source folder or source and sub folders 
         {
             CompleteFileList = new List<string>();
-            if (FolderSelector.ShowDialog() != DialogResult.Yes)
-                goto End;
             if (SelectSubFiles)
-                CompleteFileList = CollectAllFiles(FolderSelector.SelectedPath + "\\");
+                CompleteFileList = CollectAllFiles(FileSource + "\\");
             else
-                foreach (string x in Directory.GetFiles(FolderSelector.SelectedPath + "\\"))
+                foreach (string x in Directory.GetFiles(FileSource + "\\"))
                     CompleteFileList.Add(x);
-                End:
-            FolderSelector.Dispose();
             return (CompleteFileList.Count > 0);
         }
         private  List<string> AppendingLists(List<string> ListOne, List<string> ListTwo)
@@ -36,13 +31,21 @@ namespace FileCollectorAndManager
         public  List<string> CollectAllFiles(string DirectoryPath)
         {
             List<string> files = new List<string>();
-            foreach (string x in Directory.GetFiles(DirectoryPath + "\\"))
-                files.Add(x);
-            foreach (string x in Directory.GetDirectories(DirectoryPath + "\\"))
-                if ((File.GetAttributes(x) & FileAttributes.Directory) == FileAttributes.Directory)
-                    AppendingLists(files, CollectAllFiles(x));
-                else
+            try
+            {
+                foreach (string x in Directory.GetFiles(DirectoryPath + "\\"))
                     files.Add(x);
+                foreach (string x in Directory.GetDirectories(DirectoryPath + "\\"))
+                    if ((File.GetAttributes(x) & FileAttributes.Directory) == FileAttributes.Directory)
+                        AppendingLists(files, CollectAllFiles(x));
+                    else
+                        files.Add(x);
+            }
+            catch (Exception E)
+            {
+                throw E;
+            }
+            
             return files;
         }
         public  List<string> CollectAllDirectories(string DirectoryPath)
@@ -74,6 +77,23 @@ namespace FileCollectorAndManager
                 File++;
             }
             return (File >= CompleteFileList.Count) ? -1 : File ;  
+        }
+        public int ContainsFile(string FileName)
+        {
+            bool FileFound = false;
+            int x = 0;
+            if (CompleteFileList.Count == 0)
+                goto End;
+            
+            while (!FileFound && x < CompleteFileList.Count)
+            {
+                FileFound = CompleteFileList[x].Contains(FileName);
+                x++;
+            }
+            if (FileFound)
+                x--;
+            End: 
+            return (x >= CompleteFileList.Count)?-1:x ;
         }
         
     }

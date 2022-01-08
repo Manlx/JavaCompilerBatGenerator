@@ -21,6 +21,7 @@ namespace JavaCompilerBatGenerator
 
         private void btnOptions_Click(object sender, EventArgs e)
         {
+            frmSet.ShowDialog();
         }
     }
 }

@@ -3,10 +3,10 @@ using System;
 
 namespace SavedSetting
 {
-    [Serializable]
+    [Serializable]//Same Object structure of a Settings that can be saved
     public class SavedSettings
     {
-        public string JavaFXFilePath;
+        public string JFXFilePath;
         public string JDKFilePath;
     }
 }

@@ -5,16 +5,16 @@ namespace SerializerUtil
 {
     public class Serializer<E>
     {
-        
+        //Path To Serialize To
         public string Path;
         public Serializer(string Path)
         {
             this.Path = Path;
         }
-        public E DeSerializer(){
-            try
+        public E DeSerializer(){ //Reads data from file and converts back to Object
+            try 
             {
-                E OutObject = (E)(new object());
+                E OutObject = default(E);
                 BinaryFormatter BinFor = new BinaryFormatter();
                 Stream stream;
                 if (File.Exists("Settings.data"))
@@ -32,7 +32,7 @@ namespace SerializerUtil
                 throw IOE;
             }
         }
-        public bool Serialize(E SaveObject)
+        public bool Serialize(E SaveObject) //Saves an objects data in a file format
         {
             try
             {
