@@ -24,6 +24,7 @@ namespace JavaCompilerBatGenerator
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblMain = new System.Windows.Forms.Label();
             this.pnlMain = new System.Windows.Forms.Panel();
             this.chkDisplaySubFiles = new System.Windows.Forms.CheckBox();
             this.chkSubFiles = new System.Windows.Forms.CheckBox();
@@ -37,7 +38,6 @@ namespace JavaCompilerBatGenerator
             this.btnSelectFiles = new System.Windows.Forms.Button();
             this.btnGenerate = new System.Windows.Forms.Button();
             this.tthints = new System.Windows.Forms.ToolTip(this.components);
-            this.lblMain = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -73,6 +73,15 @@ namespace JavaCompilerBatGenerator
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(527, 113);
             this.panel1.TabIndex = 12;
+            // 
+            // lblMain
+            // 
+            this.lblMain.AutoSize = true;
+            this.lblMain.Location = new System.Drawing.Point(6, 9);
+            this.lblMain.Name = "lblMain";
+            this.lblMain.Size = new System.Drawing.Size(88, 23);
+            this.lblMain.TabIndex = 0;
+            this.lblMain.Text = "MainFile:";
             // 
             // pnlMain
             // 
@@ -202,10 +211,10 @@ namespace JavaCompilerBatGenerator
             this.btnSelectFiles.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSelectFiles.Font = new System.Drawing.Font("Roboto", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnSelectFiles.ForeColor = System.Drawing.Color.White;
-            this.btnSelectFiles.Location = new System.Drawing.Point(18, 550);
+            this.btnSelectFiles.Location = new System.Drawing.Point(6, 550);
             this.btnSelectFiles.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnSelectFiles.Name = "btnSelectFiles";
-            this.btnSelectFiles.Size = new System.Drawing.Size(253, 59);
+            this.btnSelectFiles.Size = new System.Drawing.Size(265, 59);
             this.btnSelectFiles.TabIndex = 6;
             this.btnSelectFiles.Text = "Select Files";
             this.btnSelectFiles.UseVisualStyleBackColor = false;
@@ -221,19 +230,11 @@ namespace JavaCompilerBatGenerator
             this.btnGenerate.Location = new System.Drawing.Point(279, 550);
             this.btnGenerate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnGenerate.Name = "btnGenerate";
-            this.btnGenerate.Size = new System.Drawing.Size(253, 59);
+            this.btnGenerate.Size = new System.Drawing.Size(265, 59);
             this.btnGenerate.TabIndex = 2;
             this.btnGenerate.Text = "Generate";
             this.btnGenerate.UseVisualStyleBackColor = false;
-            // 
-            // lblMain
-            // 
-            this.lblMain.AutoSize = true;
-            this.lblMain.Location = new System.Drawing.Point(6, 9);
-            this.lblMain.Name = "lblMain";
-            this.lblMain.Size = new System.Drawing.Size(88, 23);
-            this.lblMain.TabIndex = 0;
-            this.lblMain.Text = "MainFile:";
+            this.btnGenerate.Click += new System.EventHandler(this.btnGenerate_Click);
             // 
             // frmMain
             // 
@@ -251,6 +252,7 @@ namespace JavaCompilerBatGenerator
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Bat Generator";
+            this.Load += new System.EventHandler(this.frmMain_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.panel1.ResumeLayout(false);

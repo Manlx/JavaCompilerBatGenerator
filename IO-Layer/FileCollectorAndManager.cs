@@ -21,14 +21,13 @@ namespace FileCollectorAndManager
                     CompleteFileList.Add(x);
             return (CompleteFileList.Count > 0);
         }
-        private  List<string> AppendingLists(List<string> ListOne, List<string> ListTwo)
+        private  List<string> AppendingLists(List<string> ListOne, List<string> ListTwo)// Method to concatinate two lists
         {
-            //ListOne.Add("Going down One Directory");
             foreach (string x in ListTwo)
                 ListOne.Add(x);
             return ListOne;
         }
-        public  List<string> CollectAllFiles(string DirectoryPath)
+        public  List<string> CollectAllFiles(string DirectoryPath) //Method to discover all subfiles
         {
             List<string> files = new List<string>();
             try
@@ -41,14 +40,11 @@ namespace FileCollectorAndManager
                     else
                         files.Add(x);
             }
-            catch (Exception E)
-            {
-                throw E;
-            }
+            catch (Exception E){throw E;}
             
             return files;
         }
-        public  List<string> CollectAllDirectories(string DirectoryPath)
+        public  List<string> CollectAllDirectories(string DirectoryPath)//Method to discover all folders
         {
             List<string> Directories = new List<string>();
             Directories.Add(DirectoryPath);
@@ -56,7 +52,7 @@ namespace FileCollectorAndManager
                 AppendingLists(Directories, CollectAllDirectories(x)) ;
             return Directories;
         }
-        public  int ScanFor(string[] Phrases)
+        public  int ScanFor(string[] Phrases) //Scan through Files for a spesific string phrase
         {
             if (CompleteFileList.Count <= 0)
                 return -1;
@@ -78,7 +74,7 @@ namespace FileCollectorAndManager
             }
             return (File >= CompleteFileList.Count) ? -1 : File ;  
         }
-        public int ContainsFile(string FileName)
+        public int ContainsFile(string FileName)// Scans through complete File list and look for a spesific file name
         {
             bool FileFound = false;
             int x = 0;

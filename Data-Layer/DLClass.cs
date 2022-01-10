@@ -22,6 +22,7 @@ namespace Data_Layer
         }
         public static bool SaveSettings()
         {
+            LoadedSave = false;
             return Serializer.Serialize(SaveFile);
         }
         public static bool CheckForJFXDep()
@@ -30,6 +31,14 @@ namespace Data_Layer
             FileCM.SelectFiles(true);
             FoundJFX = FileCM.ScanFor(new string[] { "javafx" }) >= 0;
             return FoundJFX;
+        }
+        public static bool CheckForSaveJDK()
+        {
+            return CheckForJDK(SaveFile.JDKFilePath);
+        }
+        public static bool CheckForSavedJFX()
+        {
+            return CheckForJFX(SaveFile.JFXFilePath);
         }
         public static bool CheckForJFX(string SourceJDK)
         {
@@ -64,6 +73,12 @@ namespace Data_Layer
             return FoundJDK;
             
             //return FC.CheckForMain();
+        }
+        public static string[] GetFiles(string Path)
+        {
+            FileCM.FileSource = Path;
+            FileCM.SelectFiles(true);
+            return FileCM.CompleteFileList.ToArray();
         }
     }
 }
